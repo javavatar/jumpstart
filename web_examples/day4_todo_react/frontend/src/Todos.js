@@ -5,16 +5,17 @@ import TodoItem from './TodoItem';
 
 function filterTodos(todos, filter) {
     switch ( filter ){
-        case 'all':
-            return todos;
         case 'activ':
             return todos.filter( (todo) =>{
-                return todo.done == false;
+                return todo.done === false;
             });
         case 'done':
             return todos.filter( (todo) =>{
                 return todo.done;
             });
+        default:
+        case 'all':
+            return todos;
     }
 
 }

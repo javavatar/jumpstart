@@ -14,22 +14,23 @@ io.on('connection',  (socket) => {
 
   socket.on('addTodo', function (nameOfTodo) {
     addTodo(nameOfTodo);
-    io.emit('refresh', todos);
+      socket.emit('newTodo',id);
+      socket.broadcast.emit('refresh', todos);
   });
 
   socket.on('removeTodo', function (id) {
     removeTodo(id);
-    io.emit('refresh', todos);
+      socket.broadcast.emit('refresh', todos);
   });
 
   socket.on('clearCompletedTodos', function () {
     clearCompletedTodos();
-    io.emit('refresh', todos);
+      socket.broadcast.emit('refresh', todos);
   });
 
   socket.on('toggleTodo', function (id) {
     toggleTodo(id);
-    io.emit('refresh', todos);
+      socket.broadcast.emit('refresh', todos);
   });
 
 });

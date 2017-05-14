@@ -33,7 +33,19 @@ class App extends Component {
     componentDidMount() {
         this.socket.on('connect', () => this.setState({connected: true}));
         this.socket.on('disconnect', () => this.setState({connected: false}));
-        this.socket.on('refresh', (todos) => this.setState({todos: todos}));
+        this.socket.on('refresh', (todos) => {
+            console.log('refresh');
+            this.setState({todos: todos})
+        });
+        this.socket.on('newTodo', (id) =>  {
+            console.log('newtodo'+id);
+            this.state.todos.push({
+                name: this.state.inputValue,
+                done: false,
+                id: id,
+            });
+            this.setState({  inputValue: ''});
+        });
     }
 
     onInputChange(event) {
@@ -45,7 +57,8 @@ class App extends Component {
         const ENTER_KEY = 13;
         if (event.which === ENTER_KEY && this.state.inputValue.trim() !== '') {
             this.socket.emit('addTodo', this.state.inputValue);
-            this.setState({ inputValue: ''});
+
+
             // TODO: if we press enter, the todo needs to be added and the event needs to be sent to the server
             // And do not forget to set the inputValue of the state to empty!
         }
@@ -53,15 +66,31 @@ class App extends Component {
 
     onItemDelete(id) {
         this.socket.emit('removeTodo', id );
+        var newTodos = this.state.todos.filter(function (todo) {
+            return todo.id !== id;
+        });
+        this.setState( {todos: newTodos} );
+
     }
 
 
     onToggleItem(id) {
         this.socket.emit('toggleTodo', id );
+        var newTodos = this.state.todos.map(function (todo) {
+            if (todo.id == id) {
+                todo.done = !todo.done;
+            }
+            return todo;
+        });
+        this.setState( {todos: newTodos} );
     }
 
     clearCompletedTodos() {
         this.socket.emit('clearCompletedTodos');
+        var newTodos = this.state.todos.filter(function (todo) {
+            return todo.done !== true;
+        });
+        this.setState( {todos: newTodos} );
     }
 
     getOpenTodoCount() {
@@ -71,7 +100,6 @@ class App extends Component {
     }
 
     setFilter(filter) {
-        console.log("filter ="+filter)
        this.setState({filter: filter});
     }
 

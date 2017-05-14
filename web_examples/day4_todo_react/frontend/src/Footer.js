@@ -10,7 +10,7 @@ const Footer = (props) =>
             <ul className="filters">
                 <li id="filterAll"
                     onClick={props.setFilter.bind(this, 'all')}>
-                    <a className={props.filter == "all" ? "selected":""}>All</a>
+                    <a className={props.filter === "all" ? "selected":""}>All</a>
                 </li>
                 <li id="filterActiv"
 
