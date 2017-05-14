@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Todolist</title>
+  <link rel="stylesheet" href="todoapp.css">
+</head>
+<body>
+  <section class="todoapp">
+    <header>
+      <h1>JS-Todos</h1>
+      <input id="new-todo" class="new-todo" type="text" placeholder="Enter todo here" value>
+    </header>
+
+    <section class="main">
+      <ul class="todo-list">
+        <li>
+          <div class="view">
+            <input class="toggle" type="checkbox">
+            <label>task1</label>
+            <button class="destroy"></button>
+          </div>
+        </li>
+        <li class="completed">
+          <div class="view">
+            <input class="toggle" type="checkbox" checked>
+            <label>task2</label>
+            <button class="destroy"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <span class="todo-count">
+        <strong>2</strong> items left
+      </span>
+      <ul class="filters">
+        <li id="filterAll">
+          <a class="selected">All</a>
+        </li>
+        <li id="filterActiv">
+          <a >Active</a>
+        </li>
+        <li id="filterCompleted">
+          <a >Completed</a>
+        </li>
+      </ul>
+      <button class="clear-completed">
+        Clear completed
+      </button>
+    </footer>
+  </section>
+
+  <script src="jquery-3.2.1.min.js"></script>
+  <script src="application.js"></script>
+</body>
+<!-- <script src="todo.js" charset="utf-8"></script> -->
+</html>

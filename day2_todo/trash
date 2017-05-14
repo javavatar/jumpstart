@@ -1,0 +1,14 @@
+
+    /* Filter optins 'not completed' */
+    $('#filterCompleted').on('click', 'li', function() {
+        alert("filterCompleted");
+        $('.todo-list').find('li').filter('.completed').slideUp();
+    });
+
+
+    /* Filter optins 'not completed' */
+        $('.filters').on('click', '#filterActiv', function() {
+            $(this).find('a').addClass('selected');
+            $('.todo-list').find('li').filter('.completed').slideUp();
+            $('.todo-list').find('li').slideToggle();
+        });
