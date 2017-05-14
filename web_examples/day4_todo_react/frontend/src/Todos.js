@@ -2,12 +2,30 @@ import React from 'react';
 
 import TodoItem from './TodoItem';
 
+
+function filterTodos(todos, filter) {
+    switch ( filter ){
+        case 'all':
+            return todos;
+        case 'activ':
+            return todos.filter( (todo) =>{
+                return todo.done == false;
+            });
+        case 'done':
+            return todos.filter( (todo) =>{
+                return todo.done;
+            });
+    }
+
+}
+
+
 const Todos = (props) =>
 (
   <section className="main">
     <ul className="todo-list">
       {
-        props.todos.map((todo) => {
+        filterTodos(props.todos, props.filter).map((todo) => {
           return (
             <TodoItem
               key={todo.id}
